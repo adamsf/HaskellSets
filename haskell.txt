@@ -1,0 +1,31 @@
+1) max (max 8 20) (max 7 32)
+2) max 4 8 || 4 `max` 8
+3) succ
+4) square a = a * a 
+5) 
+addMe a b = a + b
+
+
+6) addUs a b c d = addMe (addMe a b) (addMe c d)
+7) grade e = if e >= 90 then 'A'            
+	     else if e >= 80 then 'B'
+
+             else if e >= 70 then 'C'
+            
+	     else if e >= 60 then 'D'            
+	     else 'F'
+8) tenPi = [3,1,4,1,5,9,2,6,5,3,5]
+9) getFirst a = a !! 0
+10) It wil work on any list.
+11) matrixPi = [[3, 1, 4, 1, 5],
+ 
+               [9, 2, 6, 5, 3], 
+            
+                [5, 8, 9, 7, 9]]
+12) attach as a = as++[a]
+13) addFront as a = a:as
+14) head - b
+    tail - ubba
+    init - a
+    last - bubb
+	

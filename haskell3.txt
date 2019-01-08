@@ -1,0 +1,42 @@
+1. Generate the first 200 results of the algebraic equation y=x^3-3x^2+3 using list comprehension.
+
+	[x^3 - 3 * x^2 + 3 | x <- [1..200]]
+
+2. Grab the first 50 numbers beyond 500 which are perfectly divisible by both 3 and 8 using list comprehension to generate and filter the results.
+
+	take 50 [x | x <- [500..], mod x 3 == 0 && mod x 8 == 0]
+
+3. Given a list, xs, and a value, v, determine how many times v is in xs using list comprehension.
+
+	numContains xs v = length [x | x <- xs, x == v]
+
+4. A company has been hired to generate floor signs and re-number the floors for a bunch of sky-rise buildings. Each building will tell the company two things: 1) how many total floors it has, and 2) what the name of the building is. The company is to generate the signs in the form of a list of tuples, (Name of Building, Floor #). The floors should be numbered from 1 to n+1, where n is how many floors are in the building. Why n+1 instead of n? Because no floor is allowed to be numbered 13 in any building, it is bad luck.
+   ex: numberFloors 102 "Empire State Building" ->
+   [(Empire State Building, 1), (Empire State Building, 2), ... (Empire State Building, 12), (Empire State Building, 14), (Empire State Building, 15),
+    ... (Empire State Building, 102), (Empire State Building, 103)]
+
+	numFloors a s = take a [(s, y) | y <- [1..], y /= 13]
+
+5. Write a function that calculates all the positive divisors any given value has.
+   ex: getDivisors 12 = [1,2,3,4,6,12]
+
+	getDivisors a = [x | x <- [1..a], mod a x == 0] 
+
+6. Write a function that, given a list of adjectives and a list of nouns, generates every adjective / noun combo that uses a 
+   simplified alliteration rule that the first letter of the adjective must match the first letter of the noun.
+   ex: alliteratives ["crazy", "smart", "cool"] ["cow", "chicken", "llama", "student"] -> ["crazy cow", "crazy chicken", "smart student", 
+   "cool cow", "cool chicken"]
+
+	alliterations xs ys = [(a, b) | a <- xs, b <- ys, a !! 0 == b !! 0] 
+
+7. Write a function that generates every possible combo of options in a Battleship game. Every combo is in the form of (Letter, Number),
+   where the options for letters go from A - J, and the numbers go from 1 - 10.
+   ex: genBattleshipCoords = [(A,1), (A,2), ..., (J, 10)]
+
+	battleCombos xs ys = [(a, b) | a <- xs, b <- ys] 
+
+8. The formula for a circle on a coordinate plane is (x-h)^2 + (y-k)^2 = r^2, where (h,k) is the location of the center of the
+   circle and r is the radius. A 300 wide by 200 tall picture has a circle that needs shaded. The center of the circle is at (100, 70) 
+   and the radius is 50. What code could be used to generate all integer (x,y) combos of coordinates inside that circle?
+
+	circle = [(x, y) | x <- [0.. 299], y <- [0.. 199], (x-100)^2 + (y-70)^2 <= 50^2 ]

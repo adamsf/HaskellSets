@@ -1,0 +1,43 @@
+1) Create a list of tuples where each letter of a given string is now written in uppercase and is now paired with the index of where it is in the string. Using no parenthesis or list comprehension.
+
+ie: indices "Cow!" -> [('C',0), ('O',1), ('W',2), ('!',3)]
+
+	indices :: String -> [(Char, Int)]
+	
+indices as = map swap . zip [0..] . map toUpper $ as
+
+
+2) Create a function to be used to abbreviate a person's inputted name into its initials only. A given name may have anywhere from 1 to infinite amount of parts to it (first, middle, last, second last, third last, but each part will be separated by a space. Keep only the first letter of each part, and have the answer come back as a single string, all uppercased. Using no parenthesis or list comprehension (building a list is allowed though).
+
+ie: initials "Peter Piper" -> "PP"
+    initials "Kiefer William Frederick Dempsey George Rufus Sutherland" -> "KWFDGRS"
+    initials "Jasmine Lucilla Elizabeth Jennifer van den Bogaerde, Birdy" -> "JLEJVDBB"
+
+	initials :: String -> String
+
+	initials str = map toUpper . map head . words $ str
+
+3) Modify number 2 to do the same thing but to exclude any word that starts with a lowercase. You may use one set of parenthesis, but no list comprehension.
+
+ie: initials2 "Peter Piper" -> "PP"
+    initials2 "Kiefer William Frederick Dempsey George Rufus Sutherland" -> "KWFDGRS"
+    initials2 "Jasmine Lucilla Elizabeth Jennifer van den Bogaerde, Birdy" -> "JLEJVB"
+
+	initials2 :: String -> String
+
+	initials2 str = filter isUpper . map head . words $ str
+
+4) Create a function which given a list and a single element determines how many times that single element is in the list. 
+   You can do this using only length and filter.
+
+	numOcc :: Eq a => a -> [a] -> Int
+	
+numOcc a str = length . filter (==a) $ str
+
+5) Create a function which given a list builds a map of its contents to the number of times each element was in the list (use number 4's function here), with no duplicate results in the final list. This can be done with just a nub and a map if you use a lambda in the map's call. 
+
+ie: "mississippi" -> [('m',1),('i',4),('s',4),('p',2)]
+
+	countVals :: Eq a => [a] -> [(a, Int)]
+
+	countVals as = nub . map (\a -> (a, numOcc a as) ) $ as

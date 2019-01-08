@@ -1,0 +1,164 @@
+1) Write a main function which asks a user to type in a String. Send this String to another function and print the result of its calculation.
+   If the String is your first name, calculate "First Name", if is it your second name, calculate "Middle Name", if it is your last name,
+   calculate "Last name", if none of the above, calculate "Stranger Danger!". Use no if statements.
+
+	main = do 
+  
+	putStrLn "Type your name"
+  
+ 	name <- getLine
+  
+	putStrLn (nameCheck name)
+
+	nameCheck :: String -> String 
+nameCheck xs 
+            
+	| xs == "Francis" = "First Name"
+            
+	| xs == "Alderson" = "Middle Name"
+            
+	| xs == "Adams" = "Last Name"
+            
+	| otherwise = "Stranger Danger!"
+
+2) Write a function which accepts a tuple of three integers and returns "White", "Black", "Red", "Green", "Blue", "A shade of Gray", "Not a color",
+   or "(#,#,#)" if it is a color with the (#,#,#) filled in with the correct numbers for that color. At maximum use two if statements. 
+
+ex: colorName (255,255,255) -> "White" 
+      colorName (3,3,3) -> "A shade of Gray" 
+      colorName (300, 200, 500) -> "Not a color" 
+
+	getColor :: (Int, Int, Int) -> String
+
+	getColor (0,0,0) = "Black"
+
+	getColor (255,255,255) = "White"
+
+	getColor (255,0,0) = "Red"
+
+	getColor (0,255,0) = "Green"
+
+	getColor (0,0,255) = "Blue"
+
+	getColor inp@(a,b,c)
+                  
+			| a > 255 || b > 255 || c > 255 = "Not a color."
+                  
+			| otherwise = show inp
+
+3) Write a function  (three times) which accepts an integer and prints "It is decidedly so" if the int is 1, "My sources say no" if 2, or
+   "Ask again later" if 3. If a number other than 1,2,or 3 were to come in, what would happen? Use no guards, |, and use no if statements. 
+
+	eightBall :: Int -> String
+
+	eightBall 1 = "It is decidedly so"
+
+	eightBall 2 = "My sources say no"
+
+	eightBall 3 = "Ask again later"
+
+	If any other number is sent in, a nonexhaustive pattern error will occur.
+
+4) Write a function that would represent a menu of choices someone might make. If they choose option #1, return "Deposit". If they choose 
+   option #2, return "Withdraw". If they choose option #3, return "Log out". 
+
+	menu :: Int -> String
+
+	menu 1 = "Deposit"
+
+	menu 2 = "Withdraw"
+	
+menu 3 = "Log out"
+	 
+5) Write a function that is used to find the average of the numbers in a list. However, generate an error if the list has no numbers in it. 
+
+	avgList :: [Double] -> Double
+
+	avgList [] = error "Empty List"
+	
+avgList as = (sum as) / (genericLength as)
+
+6) Write a function that given a list returns the first three elements in the list. If the list doesn't have three elements, return only
+   the part of the list that does exist. If the list is empty, this would return an empty list. However, write it by using patterned variables 
+   instead of using take or list comprehensions. Basically, write the function as many times as you need with a different style of parameter for 
+   the different options.
+
+	firstThree :: [a] -> [a]
+
+	firstThree [] = []
+
+	firstThree [a] = [a]
+
+	firstThree [a,b] = [a,b]
+	
+firstThree (a:b:c:_) = [a,b,c] 
+
+7) Write your own tail function, call it tail. It should produce an error if it is empty. 
+
+	tail' :: [a] -> [a]
+
+	tail' [] = error "Empty List"
+	
+tail' (_:xs) = xs 
+
+8) Write your own power function which takes an int and raises it to another int using recursion. However, don't use any built in function 
+   other than *.
+
+	pow :: Integral b => b -> b -> b
+
+	pow a 1 = a
+	
+pow a b = a * (pow a (b-1))
+
+9) Rewrite the function from an earlier set that determines what grade you have in a course (90-100 = A, 80-90 = B, etcetera). If the 
+   grade is out of bounds generate "Liar" as a result.  Use no if statements.
+
+	grades :: Int -> String
+	
+grades a 
+        
+		| a > 100 = "Liar"
+        
+		| a >= 90 = "A"
+        
+		| a >= 80 = "B"
+        
+		| a >= 70 = "C"
+        
+		| a >= 60 = "D" 
+        
+		| a >= 0 = "F"
+        
+		| otherwise = "Liar"
+
+10) Write a function that given two Strings returns "" if either String length is 0, otherwise it returns the last char of each String 
+    attached to each other attached to the result of calling the function again on every other letter. Use recursion. 
+    ie: fun "" "moo" -> "" 
+    fun "cow" "moo" -> "wo" + "oo" + "cm" -> "wooocm" 
+
+	fun :: String -> String -> String
+
+	fun as "" = ""
+fun "" bs = "" 
+
+	fun as bs = (last as):(last bs):(fun (init as) (init bs))
+
+11) Write a function that determines if two coordinates ((x,y) tuples) are "Very close" to each other (less than 1 distance), 
+    "Close" (less than 5 distance), "Somewhat near" (less than 100 distance), or "Far away" (more than 100 distance). Don't write a 
+     separate distance function, instead, use one of the options to define the distance calculation inside the function you are writing 
+     without writing the distance formula more than once. 
+     ie: howFar (3,3) (482,300) -> "Far away"
+
+	dist :: (Float, Float) -> (Float, Float) -> String
+
+	dist (a,b) (c,d)
+              
+		| dForm < 1 = "Very close"
+              
+		| dForm < 5 = "Close"
+              
+		| dForm < 100 = "Somewhat close"
+              
+		| otherwise = "Far away"
+              
+		where dForm = sqrt ( (c - a)^2 + (d - b)^2 ) 

@@ -1,0 +1,69 @@
+1. What is the type of the expression 1+1?  Explain this as if you are trying to explain it to an AP student.
+
+	Num, a function's type is the data type that is returned after the function is called.
+
+2. What is the type of max?  Explain each part of it as if you are trying to explain it to an AP student.
+
+	Max is a polymorphic function, so it returns a type variable. This means that max will return the data type of the 
+	parameters it was sent.
+
+3. If you were to write a function to calculate the average of two integers, how would you define the type of the function?
+
+	avg :: Integer -> Integer -> Double 
+
+4. If you were to write a function to find the mode of a list of anything that uses the = sign, how would you define the type of the function?
+
+	mode :: Ord a => [a] -> a
+
+5. Explain the difference between Int, Integer, Integral in words that an AP student could understand.
+
+	-ints have a limit to how large they can be
+	-integers do not have that limit 
+	-integrals are both ints and integers 
+
+6. Write a both the type declaration and the function itself that calculates the area of a trapezoid.  Allow very precise decimals to be sent in.
+
+	trapArea :: Num a => a -> a -> a -> a
+	trapArea h b t = 0.5 * h * (b + t) 
+
+7. Write your own version of the tail function for a list, make sure to define the type of the function first.
+
+	tail' :: [a] -> [a]
+
+	tail' [] = []
+
+	tail' (_:xs) = xs 
+
+8. Write a pythagorean theorem function which returns true if a^2 + b^2 equals c^2.  Limit the incoming a, b, and c to whole numbers.
+
+	isPythag :: Int -> Int -> Int -> Bool  
+	
+isPythag a b c = a^2 + b^2 == c^2
+
+9. Write an inAscendingOrder function which will work on any list as long as the list items themselves are comparable with the > or < sign, and returns 
+   true if they are in ascending order. You can write this function without using the !! at all if you think about it hard.
+
+	inAscendingOrder :: Ord a => [a] -> Bool
+	
+inAscendingOrder (a:[]) = True
+
+	inAscendingOrder (x:y:zs) = (max x y == y) && inAscendingOrder (y:zs) 
+
+10. Write a function that takes in two numbers that are currently stored in strings, then returns the values subtracted.  Ex:  subt "342" "330" -> 12
+
+	subt :: [Char] -> [Char] -> Integer
+	
+subt as bs = (read as) - (read bs) 
+
+11. Write a function that given a list of Strings, where each String is really a number like "3.2" or "5", converts them to a list of numbers.
+
+	readList' :: [[Char]] -> [Double]
+	
+readList' as = [(read x) | x <- as ]
+
+12. Explain why an AP student is like a toddler in the context of this course.
+
+	An AP student is very similar to a toddler in terms of knowledge; both are just starting to learn the basics of life/coding
+	but haven't quite started to run or form full sentences/code full programs.
+
+

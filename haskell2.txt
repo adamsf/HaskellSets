@@ -1,0 +1,103 @@
+1) Write a function called name which 'calculates' your name.
+
+	name = "Francis Adams"
+
+
+
+2) Write a function called palindrome which takes in a list and determines if it is a palindrome, 
+   this should take very little code to do this (maybe only one function call?).
+
+	palindrome as = as == (reverse as)
+
+
+
+3) Write a function called firstHalf which takes in a list and returns the first half of the list. 
+   If the list has an odd number of slots then the first 'half' would be smaller than the second 'half', 
+   like a list with length 9 would return the first 4 elements.
+
+	firstHalf as = take (div (length as) 2) as
+
+
+
+4) Write a function called secondHalf which takes in a list and returns the second half of the list.
+
+	 secondHalf as = snd(splitAt (div (length as) 2) as)
+
+
+
+5) Write a function called half, which takes in a list and a boolean, returning the first half if 
+   the boolean is true and the second half if false.
+
+	half as b = if b then fstHalf as
+            
+			 else sndHalf as
+          
+
+
+6) Write a function which given two separate lists returns the largest value of the two lists. 
+   Use as minimal code as you can.
+
+	 maxVal as bs = maximum [maximum as, maximum bs] 
+
+
+
+7) Write a functions which takes a list and two values and returns true if both of the values are in the list.
+
+	bothVals as b c = elem b as && elem c as
+
+
+
+8) Write a function which takes two lists and a value and returns if the value is in both lists.
+
+	bothLists as bs c = elem c as && elem c bs
+
+9. Calculate how many total symbols (including non-letters) are in the range of uppercase 'A' to lowercase 'z'.
+
+	length ['A'..'z']
+
+10. Build a list of all numbers from 100 to 0 by 4s (100 96 etc).
+
+	let xs = [100, 96..0]
+
+11. Without using any form of *, +, -, /, etcetera, calculate how many quarters it would take to get to $1,000.
+    Yes, I fully realize the answer can be done with a simple calculation, but let Haskell do it by using lists 
+    for practice purposes.
+
+	length [0.25, 0.50 .. 1000]
+
+12. Write a function that given two parameters, a - the starting value, and n - the number of numbers you want, 
+    calculates the first n even values starting from that starting value.  ie: firstNEvens 20 3 -> [20, 22, 24]
+
+	firstNEvens a n 
+            
+		      | even a = take n [a, a+2..]
+            
+		      | otherwise = take n [a+1, a+3..]
+
+13. Write a function that given a String as a cryptography key and a number, n, calculates a repeated pattern 
+    of the crypto key n times.  ie: cryptKey "cow" 4 -> "cowcowcowcow"
+
+	cryptKey s a = take (a * length s) (cycle s)
+
+14. Write a function that given a String as a cryptography key and a number, n, calculates only the first n
+    symbols of a repeated pattern of the key. ie: cryptKey2 "cow" 4 -> "cowc"
+
+	cryptKey2 s a = take a (cycle s)
+
+15. Write a function that given a String and a number, n, calculates a larger string with the original string 
+    repeated n times with a space between each one, but no space on the end.  ie: copyString "cow" 4 -> "cow cow cow cow"  
+
+	copyString s a = init(take (a * (length s + 1)) (cycle (s ++ [' '])))
+
+16. Write a function that calculates the average of a list of incoming numbers.
+
+	avgList as = sum as / genericLength as 
+
+17. Write a function that calculates n!, where n is the given parameter. If n is 0 or negative, make it return 1 as a default.
+
+	factorial n  
+          
+		| n <= 1 = 1 
+          
+		| otherwise = n * factorial (n - 1)
+	

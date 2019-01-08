@@ -1,0 +1,112 @@
+1) Without taking parameters, write a function that determines if any given value is positive or not.
+
+	positive :: (Num a, Ord a) => a -> Bool
+
+	positive = (>0)
+
+2) One of the first functions you saw was doubleMe, which took in a parameter and returned twice its value. 
+   Rewrite that function without having an explicity named parameter come in.
+
+	doubleMe :: Num a => a -> a
+
+	doubleMe = (*2)
+
+3) Using map, filter, or zipWith, get all of the first items out of a list of tuples parameter.
+
+	fsts :: [(a,b)] -> [a]
+
+	fsts as = map fst as
+
+4) Without explicitly taking parameters, write a function that determines the first ? number of squares, where ? is the 
+   non-named parameter. Use the map function to build the list.
+
+	numSqs :: Int -> [Integer]
+numSqs = (`take` (map (^2) [1..]))
+
+5) Reverse a list of tuples (fst->snd, snd->fst). Can you do it without list comprehension?
+
+	swap :: (a,b) -> (b,a)
+	
+swap (a,b) = (b,a)
+
+	
+
+rev :: [(a,b)] -> [(b,a)]
+	
+rev = (map swap)
+
+6) After reading about filters, (apologizing for the really poor taste example in the chapter), where 
+   have you been using filters in Haskell already without explicity calling the word filter?
+
+	The predicates in list comprehension do the same thing as the filter function.
+
+7) IMDB has a bunch of movies with ratings in a list of tuples, [(Title, Rating)]. Without using list comprehension, 
+   instead use maps/filters/zip/zipwith/whatever, find the number of movies which are rated above an 8.
+
+	goodMovies :: (Ord a, Num a) => [(String, a)] -> Int
+
+	goodMovies as = length (filter (>8) (map snd as))
+
+8) Using a lambda and a filter, calculate all possible triangles with integer side lengths from x to y. Yay for resuing old questions.
+   Reduce, reuse, recycle.
+
+	triangles :: Int -> Int -> [(Int,Int,Int)]
+	
+triangles x y = filter (\(a,b,c) -> a + b > c) [(a,b,c) | a <- [x..y], b <- [a..y], c <- [b..y]]
+
+9) Write a segment of code which has a user type in their age and determines if they are allowed to vote or not yet. 
+   Call a function that determines if they are allowed to vote, returning either "You are allowed to vote" or "You may vote in __ years" 
+   where the __ is the difference between the given age and 18.
+
+	age s 
+    
+	| s >= 18 = "You are allowed to vote."
+    
+	| otherwise = "You can vote in " ++ (show (18 - s)) ++ " years."
+	
+	
+
+main = do
+
+	putStrLn "How old are you?"
+
+	ans <- getLine
+	putStrLn (age (read ans))
+
+10) Have a user type in three numbers, start, stop, and delta, display all numbers from start to stop with delta skipping amount - 
+    unless the delta won't lead towards the stop, in which case display an error about that sequence not working.
+
+	skip :: Integral a => a -> a -> a -> [a]
+
+	skip b e d 
+         
+		| d == 0 = error "infinite list"
+         
+		| d > 0 && b > e = error "Infinite list"
+        
+		| d < 0 && e > b = error "Infinite list"  
+         
+		| otherwise = [b, (b + d) .. e]
+
+11) Given a list of Strings, filter out all Strings which do not match the password requirements of having at least one 
+    uppercase letter, one lowercase letter, one number, and being at least 8 characters long.
+
+	isPassword :: String -> Bool
+
+	isPassword s = (length s) >= 8 && length (filter isUpper s) > 0 && length (filter isLower s) > 0 && length (filter isDigit s) > 0  
+
+12) Given a list of Ints, remove all odd numbers then square every value left. Use maps/filters.
+
+	evenSq :: [Integer] -> [Integer]
+	
+evenSq as = map (^2) (filter even as)
+
+13) Determine if a number is prime using only length and filter and some math symbols.
+
+	isPrime :: Integral a => a -> Bool
+	
+isPrime a = length [x | x <- [1..a], mod a x == 0] == 2
+
+14) Find the first 50 prime numbers using filter and your previous method.
+
+	fiftyPrimes = take 50 (filter isPrime [1..])
